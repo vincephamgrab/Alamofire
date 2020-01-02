@@ -463,7 +463,11 @@ extension SessionDelegate: URLSessionTaskDelegate {
         }
 
         // Run all validations on the request before checking if an error occurred
-        request.validations.forEach { $0() }
+        let validations = request.validations
+        if validations.isEmpty {
+            print("DEBUG!!!: Alamofire: validation is empty!!!!!!")
+        }
+        validations.forEach { $0() }
 
         // Determine whether an error has occurred
         var error: Error? = error
