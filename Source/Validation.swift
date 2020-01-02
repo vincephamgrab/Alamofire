@@ -96,6 +96,7 @@ extension Request {
         -> ValidationResult
         where S.Iterator.Element == Int
     {
+        print("DEBUG!!! Alamofire: validate status codes: \(acceptableStatusCodes). Response statusCode: \(response.statusCode)")
         if acceptableStatusCodes.contains(response.statusCode) {
             return .success
         } else {
@@ -169,6 +170,7 @@ extension DataRequest {
     @discardableResult
     public func validate(_ validation: @escaping Validation) -> Self {
         let validationExecution: () -> Void = { [unowned self] in
+            print("DEBUG!!! alamofire validationExecution")
             if
                 let response = self.response,
                 self.delegate.error == nil,

@@ -463,6 +463,7 @@ extension SessionDelegate: URLSessionTaskDelegate {
         }
 
         // Run all validations on the request before checking if an error occurred
+        print("DEBUG!!! forked delegate")
         let validations = request.validations
         if validations.isEmpty {
             print("DEBUG!!!: Alamofire: validation is empty!!!!!!")
