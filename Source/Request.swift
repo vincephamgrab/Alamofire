@@ -268,6 +268,25 @@ extension Request: CustomDebugStringConvertible {
         return cURLRepresentation()
     }
 
+    open var myDebugPrefix: String {
+        var components: [String] = []
+
+        if let HTTPMethod = request?.httpMethod {
+            components.append(HTTPMethod)
+        }
+
+        if let urlString = request?.url?.absoluteString {
+            components.append(urlString)
+        }
+
+        let requestText = components.joined(separator: " ")
+        return "DEBUG!!!: Alamofire: \(Date())-\(requestText): "
+    }
+
+    open func myDebug(_ text: @autoclosure () -> String) {
+        print("\(myDebugPrefix)\(text())")
+    }
+
     func cURLRepresentation() -> String {
         var components = ["$ curl -v"]
 
